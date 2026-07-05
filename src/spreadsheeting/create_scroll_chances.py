@@ -104,15 +104,16 @@ def create_scroll_spreadsheet():
                 if calculation_strategy not in best_profits[scroll].keys():
                     best_profits[scroll][calculation_strategy] = (0,0)
 
-                scroll_chance = [x for x in scroll_chances[impling.name] if scroll.name.lower() in x[0]]
-                scroll_chance = [y for x in scroll_chance for y in x[1].replace('"', '').split("/")]
-                scroll_chance = int(scroll_chance[0]) / int(scroll_chance[1])
+                base_scroll_chance = [x for x in scroll_chances[impling.name] if scroll.name.lower() in x[0]]
+                base_scroll_chance = [y for x in base_scroll_chance for y in x[1].replace('"', '').split("/")]
+                base_scroll_chance = int(base_scroll_chance[0]) / int(base_scroll_chance[1])
+
+                master_scroll_chance = SCROLL_PROBABILITIES[impling][scroll]
 
                 calculation_function = CALCULATION_STRATEGIES[calculation_strategy]
-                #def naive_scroll_cost_calculation(master_scrolls_needed, base_scroll_probability, master_scroll_probability, cost_per_base_jar):
 
                 scrolls_produced, expected_jars_needed, expected_cost = (
-                    calculation_function(master_scrolls_desired, scroll_chance, SCROLL_PROBABILITIES[impling][scroll], price)
+                    calculation_function(master_scrolls_desired, master_scroll_chance, base_scroll_chance, price)
                 )
 
                 gross_profit = \

@@ -57,12 +57,14 @@ def graph_impling_values():
                 loot_reward = format_price(jar_data[impling.name][time_sample]["loot"])
 
                 scroll = list(SCROLL_PROBABILITIES[impling].keys())[0]
-                scroll_chance = [x for x in scroll_chances[impling.name][time_sample] if scroll.name.lower() in x[0]]
-                scroll_chance = [y for x in scroll_chance for y in x[1].replace('"', '').split("/")]
-                scroll_chance = int(scroll_chance[0]) / int(scroll_chance[1])
+                base_scroll_chance = [x for x in scroll_chances[impling.name][time_sample] if scroll.name.lower() in x[0]]
+                base_scroll_chance = [y for x in base_scroll_chance for y in x[1].replace('"', '').split("/")]
+                base_scroll_chance = int(base_scroll_chance[0]) / int(base_scroll_chance[1])
+
+                master_scroll_chance = SCROLL_PROBABILITIES[impling][scroll]
 
                 nbd = CALCULATION_STRATEGIES[CalculationStrategy.NBD]
-                scrolls_produced, jars_needed, jar_costs = nbd(1, scroll_chance, SCROLL_PROBABILITIES[impling][scroll], price)
+                scrolls_produced, jars_needed, jar_costs = nbd(1, master_scroll_chance, base_scroll_chance, price)
 
                 profit = \
                     jars_needed * loot_reward + \

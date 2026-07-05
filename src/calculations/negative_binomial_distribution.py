@@ -8,6 +8,7 @@ CONFIDENCE_RATING = negative_binomial_distribution_confidence
 
 
 def nbd_calculate_trial_number(master_scrolls_needed, master_scroll_probability, base_scroll_probability, cost_per_jar):
+
     cached_calculations = load_values()
 
     p = master_scroll_probability
