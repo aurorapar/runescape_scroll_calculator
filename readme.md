@@ -75,7 +75,7 @@ cd [INSTALL_DIRECTORY]
 python -m src.main
 ```
 
-This builds a spreadsheet in `[INSTALL_DIRECTORY]` called `clue_scroll.xlsm`. This is where all the data gets viewed. After its generated, you can style how you choose, save it, and those formatting things will carry over. To grab new data, rerun the program and reopen the spreadsheet.
+This builds a spreadsheet in `[INSTALL_DIRECTORY]` called `clue_scroll.xlsx`. This is where all the data gets viewed. After its generated, you can style how you choose, save it, and those formatting things will carry over. To grab new data, rerun the program and reopen the spreadsheet.
 
 There are 3 sheets in total - `IMPLINGS`, `LOOT_ITEMS`, and `SCROLLS`. The first two sheets can be ignored, the only one with relevant data is `SCROLLS` is as below:
 
