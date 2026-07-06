@@ -2,6 +2,7 @@ import multiprocessing
 import random
 
 import matplotlib.pyplot as plt
+from scipy.ndimage import standard_deviation
 
 from ..calculations.calculation_strategies import CalculationStrategy, CALCULATION_STRATEGIES
 
@@ -79,8 +80,12 @@ def produce_data():
                 experimental_results = [p.apply(sim_data, args=(base_scroll_chance, master_scroll_chance)) for _ in range(SIMULATION_TRIALS)]
 
             experimental_results.sort()
-            data[impling.name]["simulated mean"] = int(sum(experimental_results) / len(experimental_results))
+            mean = int(sum(experimental_results) / len(experimental_results))
+            data[impling.name]["simulated mean"] = mean
             data[impling.name]["simulated median"] = experimental_results[int(len(experimental_results)/2)]
+            std_dev = standard_deviation(experimental_results)
+            data[impling.name]["σ"] = std_dev
+            data[impling.name]["CV"] = std_dev/mean
 
     return data
 
